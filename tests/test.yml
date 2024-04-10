@@ -1,0 +1,6 @@
+---
+- name: Install zellij
+  hosts: localhost
+  remote_user: root
+  roles:
+    - sgaunet.zellij
