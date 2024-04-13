@@ -1,10 +1,10 @@
 ---
 name: CI
-on:
+'on':
   pull_request:
   push:
     branches:
-      - main
+      - '*'
   schedule:
     - cron: "30 6 * * 5"
 
@@ -29,7 +29,8 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install yamllint ansible-lint
+        run: |
+          pip3 install yamllint ansible-lint
 
       - name: Lint code.
         run: |
@@ -43,6 +44,7 @@ jobs:
         distro:
           - rockylinux9
           - rockylinux8
+          - ubuntu2204
 
     steps:
       - name: Check out the codebase.
@@ -56,10 +58,13 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule molecule-plugins[docker] docker
+        run: |
+          pip3 install ansible molecule molecule-plugins[docker] docker jmespath
 
       - name: Run Molecule tests.
-        run: molecule test
+        run: |
+          # molecule destroy
+          molecule test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
