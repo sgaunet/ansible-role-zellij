@@ -12,7 +12,7 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    zellij_version: "0.39.2"
+    zellij_version: "latest"
     zellij_bin_path: "/usr/local/bin"
     zellij_tmp_directory: "{{ lookup('env', 'TMPDIR') | default('/tmp', true) }}"
     zellij_os: "unknown-linux-musl"

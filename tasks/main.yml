@@ -1,5 +1,21 @@
 ---
 
+- name: Retrieve latest release information
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/zellij-org/zellij/releases/latest
+    return_content: true
+  register: project_info
+  changed_when: false
+  check_mode: false
+
+- name: Override version to setup if latest
+  ansible.builtin.set_fact:
+    zellij_version: "{{ project_info.content | from_json | json_query('tag_name') | replace('v', '') }}"
+  changed_when: false
+  check_mode: false
+  when:
+    - zellij_version == "latest"
+
 - name: Get zellij version
   become: false
   ansible.builtin.shell: 'set -o pipefail && zellij --version | sed "s#zellij ##g"'
@@ -25,6 +41,10 @@
         path: "{{ zellij_tmp_directory }}/{{ zellij_os }}-{{ zellij_arch }}/"
         state: directory
         mode: '0755'
+
+    - name: Print url to download zellij
+      ansible.builtin.debug:
+        msg: "https://github.com/zellij-org/zellij/releases/download/v{{ zellij_version }}/zellij-{{ zellij_arch }}-{{ zellij_os }}.tar.gz"
 
     - name: Download and unarchive zellij
       ansible.builtin.unarchive:
