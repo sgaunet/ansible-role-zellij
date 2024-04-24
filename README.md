@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/sgaunet/ansible-role-zellij/workflows/CI/badge.svg?event=push)](https://github.com/sgaunet/ansible-role-zellij/actions?query=workflow%3ACI)
 
-An Ansible Role that installs [zellij][https://github.com/zellij-org/zellij] on Linux.
+An Ansible Role that installs [zellij](https://github.com/zellij-org/zellij) on Linux.
 
 ## Requirements
 
