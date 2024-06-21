@@ -1,3 +1,6 @@
+This role is **obsolete**, please, [use this role instead.](https://github.com/sgaunet/ansible-role-gh-release-installer/blob/main/docs/available_tools.md#zellij)
+
+
 # Ansible Role: zellij
 
 [![CI](https://github.com/sgaunet/ansible-role-zellij/workflows/CI/badge.svg?event=push)](https://github.com/sgaunet/ansible-role-zellij/actions?query=workflow%3ACI)
